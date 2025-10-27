@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <title>Loto App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { font-family: sans-serif; max-width: 600px; margin: 32px auto; }
+        #status, #drawn, #uplata, #qr-result, #msg { margin-bottom: 1.5em; }
+        .hidden { display: none; }
+        input, button { padding: 0.5em; font-size: 1em; }
+        #user-area { float: right; margin: 12px; }
+    </style>
+</head>
+<body>
+    <div id="user-area">
+        <span id="user-info">Niste prijavljeni.</span>
+        <button id="login-btn">Prijavi se</button>
+        <button id="logout-btn" class="hidden">Odjavi se</button>
+    </div>
+    <h1>Loto 6/45 Web App</h1>
+    <div id="status">Učitavanje statusa kola...</div>
+    <div id="drawn"></div>
+    <div id="uplata">
+        <h2>Uplati listić</h2>
+        <form id="form-uplata">
+            <label>Brojevi (zarezom odvojeni, 6-10 brojeva od 1 do 45):<br>
+                <input type="text" id="numbers" placeholder="npr. 1,5,12,17,34,45" required>
+            </label><br><br>
+            <button type="submit">Uplati</button>
+        </form>
+        <div id="msg"></div>
+    </div>
+    <div id="qr-result"></div>
+    <script src="https://cdn.auth0.com/js/auth0-spa-js/2.0/auth0-spa-js.production.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>

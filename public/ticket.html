@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loto listić</title>
+  <style>
+    body { font-family: sans-serif; max-width: 700px; margin: 24px auto; }
+    .muted { color: #666; }
+    code { background: #f4f4f4; padding: 2px 4px; }
+  </style>
+  <script>
+    async function init() {
+      const parts = window.location.pathname.split('/');
+      const id = parts[parts.length - 1];
+      document.getElementById('ticket-id').textContent = id;
+      try {
+        const res = await fetch('/api/ticket/' + encodeURIComponent(id));
+        const data = await res.json();
+        if (!res.ok) {
+          document.getElementById('content').innerHTML = '<b>Pogreška:</b> ' + (data.error || 'Nije pronađeno.');
+          return;
+        }
+        document.getElementById('person').textContent = data.ticket.person_id;
+        document.getElementById('numbers').textContent = data.ticket.numbers.join(', ');
+        if (data.drawnNumbers) {
+          document.getElementById('drawn').textContent = data.drawnNumbers.join(', ');
+        } else {
+          document.getElementById('drawn').textContent = 'Još nema izvučenih brojeva za ovo kolo.';
+          document.getElementById('drawn').classList.add('muted');
+        }
+      } catch (e) {
+        document.getElementById('content').innerHTML = '<b>Pogreška mreže:</b> ' + e.message;
+      }
+    }
+    window.addEventListener('DOMContentLoaded', init);
+  </script>
+</head>
+<body>
+  <h1>Loto listić <span class="muted">(<code id="ticket-id"></code>)</span></h1>
+  <div id="content">
+    <p><b>Vlasnik (ID):</b> <span id="person"></span></p>
+    <p><b>Uplaćeni brojevi:</b> <span id="numbers"></span></p>
+    <p><b>Izvučeni brojevi:</b> <span id="drawn"></span></p>
+  </div>
+  <p><a href="/">Povratak na početnu</a></p>
+</body>
+</html>
+
+
