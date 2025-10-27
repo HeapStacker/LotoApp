@@ -80,7 +80,7 @@ window.addEventListener('DOMContentLoaded', async () => {
   debugLog('Updating UI...');
   updateUI();
   document.getElementById('login-btn').onclick = () => auth0.loginWithRedirect();
-  document.getElementById('logout-btn').onclick = () => auth0.logout({ returnTo: window.location.origin });
+  document.getElementById('logout-btn').onclick = () => auth0.logout({ logoutParams: { returnTo: window.location.origin } });
 
   // --- ostatak koda ---
   loadStatus();

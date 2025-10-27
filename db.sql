@@ -1,5 +1,3 @@
--- Loto baza SQL inicijalizacija
-
 CREATE TABLE IF NOT EXISTS round (
     id SERIAL PRIMARY KEY,
     is_active BOOLEAN NOT NULL DEFAULT true,
@@ -21,6 +19,3 @@ CREATE TABLE IF NOT EXISTS drawn_numbers (
     numbers INTEGER[] NOT NULL,
     drawn_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-
--- Za PostgreSQL, potrebno je imati ekstenziju za uuid:
--- CREATE EXTENSION IF NOT EXISTS "pgcrypto";
